@@ -1,0 +1,5 @@
+---
+base_os: true
+
+docker_apps: true
+file_sharing: true

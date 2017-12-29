@@ -1,0 +1,33 @@
+---
+disks:
+  - path : /mnt/disk1 
+    src: /dev/disk/by-id/ata-WDC_WD20EARX-22PASB0-WD-WCAZA9489123-part5
+    fs: ext4
+  - path : /mnt/disk2
+    src: /dev/disk/by-id/ata-ST750LM022_HN-M750MBB_S2USJ9BCA01502-part1
+    fs: ext4
+
+mergerfs_path: /mnt/storage
+
+base_packages:
+  - vim
+  - tmux
+  - git
+  - rsync
+  - ranger
+  - curl
+  - sudo
+  - tree
+
+fs_packages:
+  - mergerfs
+
+monitoring_packages:
+  - smartmontools
+  - fancontrol
+  - lm-sensors
+
+management_packages:
+  - fail2ban
+  - lynis
+

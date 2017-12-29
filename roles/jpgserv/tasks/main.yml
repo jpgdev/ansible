@@ -1,0 +1,12 @@
+---
+- name: Install packages
+  import_tasks: install-pkgs.yml
+  when: base_os
+
+- name: Setup disks & partitions
+  import_tasks: setup-disks.yml
+  when: base_os
+
+- name: Setup file sharing
+  import_tasks: setup-file-sharing.yml
+  when: file_sharing

@@ -1,0 +1,12 @@
+#jpgserv.yml
+---
+- hosts: all
+  become: true
+  roles:
+    # - docker
+    # - mergerfs
+    # - snapraid
+    - jpgserv
+
+
+

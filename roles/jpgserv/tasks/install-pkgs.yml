@@ -1,0 +1,31 @@
+---
+- name: Check that the system is up to date
+  apt:
+    update_cache: yes
+    upgrade: full
+    cache_valid_time: 300
+
+- name: Install basic packages
+  apt: pkg={{ item }} state=present
+  with_items: "{{ base_packages }}"
+  tags:
+    - packages
+
+- name: Install file system packages
+  apt: pkg={{ item }} state=present
+  with_items: "{{ fs_packages }}"
+  tags:
+    - packages
+
+- name: Install monitoring packages
+  apt: pkg={{ item }} state=present
+  with_items: "{{ monitoring_packages }}"
+  tags:
+    - packages
+
+- name: Install management packages
+  apt: pkg={{ item }} state=present
+  with_items: "{{ management_packages }}"
+  tags:
+    - packages
+

@@ -1,0 +1,38 @@
+---
+# We make sure we have mergerfs installed
+- name: Install mergerfs package
+  apt: pkg=mergerfs state=present
+  tags:
+      - packages
+
+- name: Create mount points
+  file:
+    dest: "{{ item.path }}"
+    state: directory
+    mode: 0777
+  with_items: "{{ disks }}"
+
+- name: Mount storage disks
+  mount:
+    name: "{{ item.path }}"
+    src: "{{ item.src }}"
+    fstype: "{{ item.fs }}"
+    # change to 'mounted' to auto-mount the disks
+    state: present
+  with_items: "{{ disks }}"
+
+- name: Create mergerfs storage mount points
+  file:
+    dest: "{{ mergerfs_path }}"
+    state: directory
+    mode: 0777
+
+- name: Mount mergerfs array
+  mount:
+    name: "{{ mergerfs_path }}"
+    # Make sure this fits witht he actual mount points
+    src: /mnt/disk*
+    opts: direct_io,dfautls,allow_other,minfreespace=50G,fsname=mergerfs
+    fstype: fuse.mergerfs
+    # change to 'mounted' to auto-mount the disks
+    state: present
